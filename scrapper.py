@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import smtplib
 import time
-from credentials import gmailMailPassword
+from informMyself import send_mail
 
 URL = 'https://jingfeipeng.github.io/'
 
@@ -18,29 +17,9 @@ def checkName():
     title = title.strip()
     print(title)
     if title == "JEFFER PENG":
-        send_mail()
+        send_mail("Test successful","check Link: " + URL)
         return True
     return False
-
-
-def send_mail():
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.ehlo()
-
-    server.login("pengjefferbms@gmail.com", gmailMailPassword)
-
-    subject = "Test successful"
-    body = "check Link: " + URL
-    msg = f"Subject: {subject}\n\n{body}"
-    server.sendmail(
-        "pengjefferbms@gmail.com",
-        "jf2peng@edu.uwaterloo.ca",
-        msg
-    )
-    print("Email sent")
-    server.quit()
 
 
 while True:
