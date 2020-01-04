@@ -1,9 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-import smtplib
 import time
-from credentials import gmailMailPassword
+from informMyself import send_mail
 
 URL = 'https://www.facebook.com/groups/110354088989367/'
 
@@ -29,12 +28,14 @@ def checkSubletGroup():
             print(post.text)
             if post.text not in existingSublets:
                 existingSublets.add(post.text)
+                send_mail("Found sublet", post.text)
                 # stops running when found
                 return True
 
 
 while True:
     if checkSubletGroup():
+
         break
     # check every hour
     time.sleep(60*60)
