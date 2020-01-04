@@ -30,12 +30,9 @@ def checkSubletGroup():
                 existingSublets.add(post.text)
                 send_mail("Found sublet", post.text)
                 # stops running when found
-                return True
 
 
 while True:
-    if checkSubletGroup():
-
-        break
+    checkSubletGroup()
     # check every hour
     time.sleep(60*60)
